@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>تبادل — منصة تبادل المهارات</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#14213d;--mute:#5b6478;--line:#e1e5ec;--teal:#0e7c86;--tealbg:#dff2f3;--sun:#f4b942;--sunbg:#fdf0d2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1624;--card:#18223a;--ink:#eef1f7;--mute:#9aa5bd;--line:#2a3654;--teal:#4cc4cf;--tealbg:#143b44;--sun:#f4b942;--sunbg:#3d3118}}
+:root[data-theme="dark"]{--bg:#0f1624;--card:#18223a;--ink:#eef1f7;--mute:#9aa5bd;--line:#2a3654;--teal:#4cc4cf;--tealbg:#143b44;--sun:#f4b942;--sunbg:#3d3118}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif;line-height:1.7}
+.wrap{max-width:960px;margin:0 auto;padding:0 18px}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.logo{font-weight:700;font-size:22px}
+.logo b{color:var(--teal)}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--teal);color:#fff;border:0;border-radius:10px;padding:9px 16px;font-weight:500}
+:root[data-theme="dark"] .btn,:root:not([data-theme="light"]) .btn{color:#06232a}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:focus-visible,input:focus-visible,select:focus-visible,.chip:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.hero{padding:28px 0 20px}
+h1{font-size:clamp(28px,6vw,46px);line-height:1.3;margin:0 0 12px;max-width:16em}
+.hero p{color:var(--mute);max-width:34em;margin:0 0 22px;font-size:17px}
+.swap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.pill{padding:10px 16px;border-radius:999px;font-weight:700}
+.pill.a{background:var(--tealbg);color:var(--teal)}
+.pill.b{background:var(--sunbg);color:var(--ink)}
+.arrows{font-size:26px;color:var(--mute);display:inline-block;animation:sw 2.4s ease-in-out 1}
+@keyframes sw{0%{transform:rotate(0)}60%{transform:rotate(180deg)}100%{transform:rotate(180deg)}}
+@media (prefers-reduced-motion:reduce){.arrows{animation:none}}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 14px}
+input,select{font:inherit;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+#q{flex:1 1 200px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px}
+.chip{flex:none;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.chip[aria-pressed="true"]{background:var(--teal);color:#fff;border-color:var(--teal)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;padding-bottom:30px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.who{display:flex;align-items:center;gap:10px}
+.av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:var(--tealbg);color:var(--teal)}
+.who small{color:var(--mute);display:block;line-height:1.3}
+.row{font-size:15px}
+.row span{display:inline-block;border-radius:8px;padding:1px 9px;margin-inline-start:6px;font-weight:500}
+.o{background:var(--tealbg);color:var(--teal)}
+.w{background:var(--sunbg);color:var(--ink)}
+.card .btn{margin-top:auto}
+.btn.done{background:var(--line);color:var(--mute)}
+h2{font-size:22px;margin:6px 0 10px}
+.add{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-bottom:30px}
+.add .btn{align-self:end}
+.empty{grid-column:1/-1;color:var(--mute);padding:20px 0}
+#toast{position:fixed;inset-inline:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:420px;margin:0 auto;background:var(--ink);color:var(--bg);padding:12px 16px;border-radius:12px;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.on{opacity:1}
+footer{color:var(--mute);text-align:center;padding:10px 0 30px;font-size:14px}
+
+.req{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:10px}
+.req small{color:var(--mute)}.st{border-radius:8px;padding:1px 10px;font-weight:500;background:var(--sunbg)}
+.st.ok{background:var(--tealbg);color:var(--teal)}
+.bar{background:var(--sunbg);border-radius:12px;padding:12px 14px;margin-bottom:14px}
+#chat{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:6px 0 24px;overflow:hidden}
+#chat header{padding:10px 14px;border-bottom:1px solid var(--line)}
+#msgs{height:260px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.m{max-width:80%;padding:8px 12px;border-radius:12px;background:var(--bg);word-break:break-word}
+.m.me{align-self:flex-start;background:var(--tealbg);color:var(--ink)}
+.m small{display:block;color:var(--mute);font-size:12px}
+.send{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
+.send input{flex:1}.note{color:var(--mute);font-size:13px;padding:0 14px 10px}
+#rate{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:6px 0 14px;display:grid;gap:10px}
+.stars{display:flex;gap:4px}.stars button{background:none;border:0;font-size:30px;color:var(--line);padding:0 2px;line-height:1}
+.stars button.on{color:var(--sun)}.rt{font-size:14px;color:var(--mute)}.rt b{color:var(--ink)}
+#sched{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:6px 0 14px;display:grid;gap:10px}
+.when{display:block;margin-top:4px;font-weight:500}.when a{color:var(--teal)}
+.cm{background:var(--bg);border-radius:10px;padding:8px 10px;font-size:14px}
+.cm small{color:var(--mute)}.lnk{background:none;border:0;color:var(--teal);padding:0;font-size:14px;text-decoration:underline}
+.two{display:flex;gap:8px;margin-top:auto}.two .btn{flex:1;margin-top:0;padding-inline:8px}
+.auth{display:grid;gap:10px;max-width:380px;margin:0 0 24px}.auth .row2{display:flex;gap:8px}.auth .btn{flex:1}
+.pwrap{position:relative}.pwrap input{width:100%;padding-right:48px}.eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--teal);font-weight:500;padding:6px 8px;display:flex;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="logo">تبا<b>دل</b></div><span class="st ok" id="bal" hidden></span> <button class="btn ghost" id="mine" hidden>ملفي</button> <button class="btn ghost" id="out" hidden>خروج</button></header>
+<section class="hero">
+<h1>علّم ما تتقنه، وتعلّم ما تحتاجه</h1>
+<p>منصة يتبادل فيها الناس المهارات بلا مال: تعطي مهارة وتأخذ مهارة.</p>
+<div class="swap" aria-hidden="true"><span class="pill a">أعلّمك الإنجليزية</span><span class="arrows">⇄</span><span class="pill b">تعلّمني التصميم</span></div>
+</section>
+<section class="auth" id="auth"><h2>ادخل أو أنشئ حسابًا</h2>
+<input id="em" type="email" dir="ltr" placeholder="البريد الإلكتروني" autocomplete="email" aria-label="البريد">
+<div class="pwrap"><input id="pw" type="password" dir="ltr" placeholder="كلمة المرور (6 أحرف على الأقل)" autocomplete="current-password" aria-label="كلمة المرور"><button type="button" class="eye" id="eye" aria-label="إظهار كلمة المرور"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg></button></div>
+<div class="row2"><button class="btn" id="li">دخول</button><button class="btn ghost" id="su">حساب جديد</button></div></section>
+<div id="app" hidden>
+<div class="bar" id="bar" hidden></div>
+<div class="bar" id="next" hidden></div>
+<section id="reqsec" hidden><h2>طلباتي</h2><div id="reqs"></div>
+<div id="sched" hidden><b id="st2"></b><input id="sd" type="datetime-local" aria-label="موعد الجلسة"><input id="sl" type="url" dir="ltr" placeholder="رابط الاتصال (اختياري) https://" aria-label="رابط الاتصال">
+<div><button class="btn" id="ss">احفظ الموعد</button> <button class="btn ghost" id="sx">إلغاء</button></div></div>
+<div id="rate" hidden><b id="rt"></b><div class="stars" id="stars" role="radiogroup" aria-label="التقييم"></div>
+<input id="rc" placeholder="تعليق قصير عن الجلسة (اختياري)" maxlength="200" aria-label="تعليق"><div><button class="btn" id="rs">أرسل التقييم</button> <button class="btn ghost" id="rx">إلغاء</button></div></div>
+<div id="chat" hidden><header><b id="ct"></b><button class="btn ghost" id="cx">إغلاق</button></header>
+<div id="msgs" aria-live="polite"></div>
+<div class="send"><input id="mi" placeholder="اكتب رسالة" aria-label="رسالة" maxlength="500"><button class="btn" id="ms">إرسال</button></div>
+<p class="note">المحادثات مرئية لأعضاء المنصة المصرّح لهم. لا تشارك كلمات مرور أو بيانات حساسة.</p></div></section>
+<section>
+<h2>تصفّح المهارات</h2>
+<div class="tools"><input id="q" type="search" placeholder="ابحث عن مهارة أو اسم" aria-label="بحث"><select id="fco" aria-label="تصفية حسب الدولة"></select><select id="fc" aria-label="تصفية حسب المدينة"></select></div>
+<div class="chips" id="chips"></div>
+<div class="grid" id="grid"></div>
+</section>
+<section id="addsec">
+<h2>ملفي</h2>
+<div class="add">
+<input id="n" placeholder="اسمك" aria-label="اسمك">
+<input id="o" placeholder="مهارة أقدّمها" aria-label="مهارة أقدمها">
+<input id="w" placeholder="مهارة أريد تعلمها" aria-label="مهارة أريد تعلمها">
+<select id="c" aria-label="المجال"></select>
+<select id="country" aria-label="الدولة"></select>
+<select id="city" aria-label="المدينة"></select>
+<button class="btn" id="save">احفظ ملفي</button>
+</div>
+</section>
+</div>
+<footer>تبادل — نسخة تجريبية</footer>
+</div>
+<div id="toast" role="status"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+const SB_URL="https://rnyvpqjetzrqpursfmnp.supabase.co";
+const SB_KEY="sb_publishable_OlI3VVILpvVDLUPObwM9Ag_RMNYhHM5";
+const sb=supabase.createClient(SB_URL,SB_KEY);
+const geo={"السعودية":["الدمام","الخبر","الظهران","القطيف","الجبيل","الأحساء","الرياض","جدة","مكة","المدينة","أخرى"],"الإمارات":["دبي","أبوظبي","الشارقة","أخرى"],"الكويت":["مدينة الكويت","أخرى"],"قطر":["الدوحة","أخرى"],"البحرين":["المنامة","أخرى"],"عُمان":["مسقط","أخرى"],"مصر":["القاهرة","الإسكندرية","أخرى"],"الأردن":["عمّان","أخرى"],"دول أخرى":["أخرى"]};
+function fillCity(id,country,all){const l=geo[country]||[];$(id).innerHTML=(all?`<option value="">كل المدن</option>`:"")+l.map(c=>`<option>${c}</option>`).join("")}
+const cats=["اللغات","البرمجة","التصميم","الموسيقى","الطبخ","الأعمال"];
+let me=null,cat="الكل",profiles=[],reqs=[],ratings=[],myRatings=[],myBal=0,openCm=new Set(),chan=null,timer=null,schRid=null,rateRid=null,rateN=0,cur=null,chatChan=null;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+function toast(t){const e=$("toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),2800)}
+const stText={pending:"بانتظار الرد",accepted:"مقبول",declined:"مرفوض"};
+const nm=id=>(profiles.find(x=>x.id===id)||{}).n||"عضو";
+function errText(e){const m=(e&&e.message)||"";
+ if(m.includes("not enough points"))return "رصيدك لا يكفي لهذه العملية";
+ if(m.includes("save your profile"))return "احفظ ملفك أولًا";
+ if(m.includes("duplicate"))return "أرسلت طلبًا لهذا العضو من قبل";
+ if(m.includes("future"))return "اختر موعدًا في المستقبل";
+ return "تعذّر تنفيذ العملية"}
+function chips(){$("chips").innerHTML=["الكل",...cats].map(c=>`<button class="chip" aria-pressed="${c===cat}" data-c="${c}">${c}</button>`).join("")}
+function rtLine(id){const a=ratings.filter(r=>r.to===id);if(!a.length)return `<div class="rt">لا تقييمات بعد</div>`;
+ const avg=a.reduce((t,r)=>t+r.stars,0)/a.length;
+ const c=a.filter(r=>r.text).sort((x,y)=>y.ts-x.ts).slice(0,3),open=openCm.has(id);
+ const tg=c.length?` <button class="lnk" data-cm="${esc(id)}" aria-expanded="${open}">${open?"إخفاء التعليقات":"عرض التعليقات"}</button>`:"";
+ const list=open?c.map(r=>`<div class="cm">${"★".repeat(r.stars)} <small>${esc(new Date(r.ts).toLocaleDateString("ar"))}</small><br>${esc(r.text)}</div>`).join(""):"";
+ const bd=[a.length>=10?"🏆 معلّم متميز":a.length>=3&&avg>=4.5?"🏅 معلّم موثوق":"",a.length>=1?"✅ أنهى جلسة":""].filter(Boolean).map(t=>`<span class="st ok">${t}</span>`).join(" ");
+ return `<div class="rt">${bd?bd+"<br>":""}<b>★ ${avg.toFixed(1)}</b> (${a.length} تقييم)${tg}</div>${list}`}
+const fmt=t=>new Date(t).toLocaleString("ar",{weekday:"long",day:"numeric",month:"long",hour:"numeric",minute:"2-digit"});
+const okLink=l=>/^https:\/\//.test(l||"");
+function sessLine(r){const x=r.session;if(!x)return"";
+ const l=okLink(x.link)?` · <a href="${esc(x.link)}" target="_blank" rel="noopener noreferrer">انضم للجلسة</a>`:"";
+ return `<span class="when">📅 ${esc(fmt(x.when))}${l}</span>`}
+function nextBar(){const n=$("next");
+ const u=reqs.filter(r=>r.status==="accepted"&&r.session&&r.session.when>Date.now()-36e5).sort((a,b)=>a.session.when-b.session.when)[0];
+ if(!u){n.hidden=true;return}
+ const h=(u.session.when-Date.now())/36e5,tag=h<=1?"تبدأ خلال ساعة":h<=24?"خلال 24 ساعة":"";
+ const l=okLink(u.session.link)?` · <a href="${esc(u.session.link)}" target="_blank" rel="noopener noreferrer">انضم</a>`:"";
+ n.hidden=false;n.innerHTML=`📅 جلستك القادمة مع <b>${esc(u.to===me?u.fromName:u.toName)}</b>: ${esc(fmt(u.session.when))}${tag?` <span class="st">${tag}</span>`:""}${l}`}
+function render(){nextBar();
+ const bl=$("bal");if(me){bl.hidden=false;bl.textContent="رصيدك: "+myBal+" نقطة"}
+ const q=$("q").value.trim(),out=new Map(reqs.filter(r=>r.from===me).map(r=>[r.to,r]));
+ const fcov=$("fco").value,fcv=$("fc").value,place=fcv||fcov,list=profiles.filter(x=>(cat==="الكل"||x.c===cat)&&(!fcov||x.country===fcov)&&(!fcv||x.city===fcv)&&(!q||(x.n+x.o+x.w).includes(q)));
+ $("grid").innerHTML=list.length?list.map(x=>{const mc=x.id===me,r=out.get(x.id);
+  const btn=mc?`<button class="btn done" disabled>هذا ملفك</button>`:r?`<button class="btn done" disabled>${stText[r.status]||"تم الإرسال"}</button>`:`<div class="two"><button class="btn" data-to="${esc(x.id)}">اطلب تبادلًا</button><button class="btn ghost" data-to="${esc(x.id)}" data-mode="points">اطلب بنقطة</button></div>`;
+  return `<article class="card"><div class="who"><div class="av">${esc((x.n||"؟")[0])}</div><div><b>${esc(x.n)}</b><small>${esc(x.c)} · ${esc(x.city)}، ${esc(x.country)}</small></div></div><div class="row">يقدّم<span class="o">${esc(x.o)}</span></div><div class="row">يريد<span class="w">${esc(x.w)}</span></div>${rtLine(x.id)}${btn}</article>`}).join(""):(profiles.length&&place?`<p class="empty">لا توجد مهارات في ${esc(place)} حاليًا. <button class="lnk" data-allc="1">اعرض الكل</button></p>`:`<p class="empty">لا توجد مهارات بعد. احفظ ملفك لتكون أول من ينضم.</p>`);
+ const mine=reqs.sort((a,b)=>b.ts-a.ts);
+ $("reqsec").hidden=!mine.length;
+ $("reqs").innerHTML=mine.map(r=>{const inc=r.to===me,pts=r.mode==="points";
+  const tail=r.status==="accepted"?`${pts?(r.done?` <span class="st ok">اكتملت</span>`:(inc?` <button class="btn" data-done="${esc(r.id)}">أكّدت إتمام الجلسة (+1)</button>`:` <span class="st">بانتظار تأكيد المعلّم</span>`)):""} <button class="btn" data-chat="${esc(r.id)}">محادثة</button> <button class="btn ghost" data-sch="${esc(r.id)}">${r.session?"غيّر الموعد":"حدّد موعدًا"}</button> <button class="btn ghost" data-rate="${esc(r.id)}">${myRatings.some(x=>x.rid===r.id)?"عدّل تقييمي":"قيّم الجلسة"}</button>`:"";
+  const act=inc&&r.status==="pending"?`<span><button class="btn" data-a="accepted" data-r="${esc(r.id)}">قبول</button> <button class="btn ghost" data-a="declined" data-r="${esc(r.id)}">رفض</button></span>`:`<span><span class="st ${r.status==="accepted"?"ok":""}">${stText[r.status]}</span>${tail}</span>`;
+  return `<div class="req"><div>${inc?`<b>${esc(r.fromName)}</b> ${pts?"يطلب جلسة بنقطة":"يطلب تبادلًا"} معك`:`طلبك إلى <b>${esc(r.toName)}</b>`}<br><small>${esc(r.offer)} ⇄ ${esc(r.want)}</small>${sessLine(r)}</div>${act}</div>`}).join("")}
+async function load(){if(!me)return;
+ const [p,r,rt,mr,b]=await Promise.all([sb.from("profiles").select("*"),sb.from("requests").select("*"),sb.from("ratings_public").select("*"),sb.from("ratings").select("*").eq("rater_id",me),sb.rpc("my_balance")]);
+ profiles=(p.data||[]).map(x=>({id:x.id,n:x.name,o:x.offer,w:x.want,c:x.category,city:x.city||"الدمام",country:x.country||"السعودية",ts:Date.parse(x.updated_at||x.created_at)})).sort((a,b)=>b.ts-a.ts);
+ reqs=(r.data||[]).map(x=>({id:x.id,from:x.from_id,to:x.to_id,fromName:nm(x.from_id),toName:nm(x.to_id),offer:x.offer,want:x.want,mode:x.mode,status:x.status,done:x.done,ts:Date.parse(x.created_at),session:x.session_when?{when:Date.parse(x.session_when),link:x.session_link||""}:null}));
+ ratings=(rt.data||[]).map(x=>({to:x.ratee_id,stars:x.stars,text:x.comment,ts:Date.parse(x.created_at)}));
+ myRatings=(mr.data||[]).map(x=>({rid:x.request_id,stars:x.stars,text:x.comment}));
+ myBal=typeof b.data==="number"?b.data:0;
+ const m=profiles.find(x=>x.id===me);if(m&&!$("n").value){$("n").value=m.n;$("o").value=m.o;$("w").value=m.w;$("c").value=m.c;$("country").value=m.country;fillCity("city",m.country,false);$("city").value=m.city}
+ render()}
+async function call(fn,args,ok){const {error}=await sb.rpc(fn,args);if(error){toast(errText(error));return false}if(ok)toast(ok);await load();return true}
+$("chips").onclick=e=>{const b=e.target.closest("[data-c]");if(b){cat=b.dataset.c;chips();render()}};
+$("q").oninput=render;
+const cl=Object.keys(geo).map(c=>`<option>${c}</option>`).join("");
+$("country").innerHTML=cl;fillCity("city","السعودية",false);$("country").onchange=()=>fillCity("city",$("country").value,false);
+$("fco").innerHTML=`<option value="">كل الدول</option>`+cl;$("fco").value="السعودية";fillCity("fc","السعودية",true);$("fc").value="الدمام";
+$("fco").onchange=()=>{fillCity("fc",$("fco").value,true);render()};$("fc").onchange=render;
+$("c").innerHTML=cats.map(c=>`<option>${c}</option>`).join("");
+$("mine").onclick=()=>$("addsec").scrollIntoView({behavior:"smooth"});
+$("grid").onclick=async e=>{const al=e.target.closest("[data-allc]");if(al){$("fco").value="";fillCity("fc","",true);render();return}
+ const t=e.target.closest("[data-cm]");if(t){const id=t.dataset.cm;openCm.has(id)?openCm.delete(id):openCm.add(id);render();return}
+ const b=e.target.closest("[data-to]");if(!b)return;
+ if(!profiles.find(p=>p.id===me)){toast("احفظ ملفك أولًا ثم اطلب التبادل");$("addsec").scrollIntoView({behavior:"smooth"});return}
+ await call("create_request",{p_to:b.dataset.to,p_mode:b.dataset.mode==="points"?"points":"swap"},"أُرسل الطلب")};
+$("save").onclick=async()=>{const n=$("n").value.trim(),o=$("o").value.trim(),w=$("w").value.trim();
+ if(!n||!o||!w){toast("املأ الاسم والمهارتين أولًا");return}
+ const {error}=await sb.from("profiles").upsert({id:me,name:n,offer:o,want:w,category:$("c").value,city:$("city").value,country:$("country").value,updated_at:new Date().toISOString()});
+ if(error){toast("تعذّر حفظ الملف");return}toast("حُفظ ملفك");await load();window.scrollTo({top:0,behavior:"smooth"})};
+async function loadMsgs(){if(!cur)return;
+ const {data}=await sb.from("messages").select("*").eq("request_id",cur).order("created_at");const box=$("msgs");
+ box.innerHTML=(data||[]).map(m=>`<div class="m ${m.sender_id===me?"me":""}"><small>${esc(nm(m.sender_id))}</small>${esc(m.body)}</div>`).join("")||`<p class="empty">ابدأ المحادثة: اتفقا على موعد وطريقة الجلسة.</p>`;box.scrollTop=box.scrollHeight}
+function closeChat(){if(chatChan)sb.removeChannel(chatChan);chatChan=null;cur=null;$("chat").hidden=true}
+function openChat(rid){const r=reqs.find(x=>x.id===rid);if(!r)return;closeChat();cur=rid;$("chat").hidden=false;$("ct").textContent="محادثة مع "+(r.to===me?r.fromName:r.toName);loadMsgs();
+ chatChan=sb.channel("chat-"+rid).on("postgres_changes",{event:"INSERT",schema:"public",table:"messages",filter:"request_id=eq."+rid},loadMsgs).subscribe();$("chat").scrollIntoView({behavior:"smooth"})}
+async function sendMsg(){const t=$("mi").value.trim();if(!t||!cur)return;$("mi").value="";
+ const {error}=await sb.from("messages").insert({request_id:cur,sender_id:me,body:t});if(error){$("mi").value=t;toast("تعذّر إرسال الرسالة");return}loadMsgs()}
+$("ms").onclick=sendMsg;$("mi").onkeydown=e=>{if(e.key==="Enter")sendMsg()};$("cx").onclick=closeChat;
+function drawStars(){$("stars").innerHTML=[1,2,3,4,5].map(i=>`<button class="${i<=rateN?"on":""}" data-s="${i}" role="radio" aria-checked="${i===rateN}" aria-label="${i} من 5">★</button>`).join("")}
+$("stars").onclick=e=>{const b=e.target.closest("[data-s]");if(b){rateN=+b.dataset.s;drawStars()}};
+$("rx").onclick=()=>{$("rate").hidden=true;rateRid=null};
+$("rs").onclick=async()=>{if(!rateRid)return;if(!rateN){toast("اختر عدد النجوم أولًا");return}
+ if(await call("rate_session",{p_id:rateRid,p_stars:rateN,p_comment:$("rc").value.trim()},"شكرًا، حُفظ تقييمك")){$("rate").hidden=true;rateRid=null}};
+$("sx").onclick=()=>{$("sched").hidden=true;schRid=null};
+$("ss").onclick=async()=>{if(!schRid)return;const t=new Date($("sd").value).getTime();
+ if(!$("sd").value||isNaN(t)){toast("اختر التاريخ والوقت");return}
+ if(t<Date.now()){toast("اختر موعدًا في المستقبل");return}
+ const l=$("sl").value.trim();if(l&&!okLink(l)){toast("الرابط يجب أن يبدأ بـ https://");return}
+ if(await call("set_session",{p_id:schRid,p_when:new Date(t).toISOString(),p_link:l},"حُفظ الموعد")){$("sched").hidden=true;schRid=null}};
+$("reqs").onclick=async e=>{const g=s=>e.target.closest(s);let b;
+ if(b=g("[data-a]")){await call("respond_request",{p_id:b.dataset.r,p_status:b.dataset.a});return}
+ if(b=g("[data-done]")){await call("complete_session",{p_id:b.dataset.done},"حصلت على نقطة");return}
+ if(b=g("[data-chat]")){openChat(b.dataset.chat);return}
+ if(b=g("[data-rate]")){const r=reqs.find(x=>x.id===b.dataset.rate);if(!r)return;rateRid=r.id;
+  const old=myRatings.find(x=>x.rid===r.id);rateN=old?old.stars:0;$("rc").value=old?old.text||"":"";
+  $("rt").textContent="قيّم جلستك مع "+(r.to===me?r.fromName:r.toName);drawStars();$("rate").hidden=false;$("rate").scrollIntoView({behavior:"smooth",block:"center"});return}
+ if(b=g("[data-sch]")){const r=reqs.find(x=>x.id===b.dataset.sch);if(!r)return;schRid=r.id;
+  const z=n=>String(n).padStart(2,"0");let v="";
+  if(r.session){const d=new Date(r.session.when);v=`${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())}T${z(d.getHours())}:${z(d.getMinutes())}`}
+  $("sd").value=v;$("sl").value=r.session?r.session.link:"";
+  $("st2").textContent="موعد جلستك مع "+(r.to===me?r.fromName:r.toName);$("sched").hidden=false;$("sched").scrollIntoView({behavior:"smooth",block:"center"})}};
+async function authGo(signup){const email=$("em").value.trim(),password=$("pw").value;
+ if(!email||password.length<6){toast("أدخل بريدًا وكلمة مرور من 6 أحرف على الأقل");return}
+ const {data,error}=signup?await sb.auth.signUp({email,password}):await sb.auth.signInWithPassword({email,password});
+ if(error){const m=error.message||"";toast(m.includes("Invalid login")?"بيانات الدخول غير صحيحة":m.includes("already")?"البريد مسجّل من قبل، اضغط دخول":"تعذّر الدخول");return}
+ if(signup&&!data.session)toast("تحقق من بريدك لتأكيد الحساب ثم ادخل")}
+const EYE='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',EYE_OFF='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg>';
+$("eye").onclick=()=>{const p=$("pw"),show=p.type==="password";p.type=show?"text":"password";$("eye").innerHTML=show?EYE:EYE_OFF;$("eye").setAttribute("aria-label",show?"إخفاء كلمة المرور":"إظهار كلمة المرور")};
+$("li").onclick=()=>authGo(false);$("su").onclick=()=>authGo(true);
+$("out").onclick=()=>sb.auth.signOut();
+function enter(){$("auth").hidden=true;$("app").hidden=false;$("out").hidden=false;$("mine").hidden=false;load();
+ chan=sb.channel("live").on("postgres_changes",{event:"*",schema:"public",table:"requests"},load).subscribe();
+ timer=setInterval(load,20000)}
+function leave(){me=null;closeChat();if(chan)sb.removeChannel(chan);chan=null;clearInterval(timer);
+ $("auth").hidden=false;$("app").hidden=true;$("out").hidden=true;$("mine").hidden=true;$("bal").hidden=true;["n","o","w","pw"].forEach(k=>$(k).value="");$("pw").type="password";$("eye").innerHTML=EYE_OFF}
+sb.auth.onAuthStateChange((_e,s)=>{if(s&&s.user){if(s.user.id!==me){me=s.user.id;setTimeout(enter,0)}}else if(me){leave()}});
+chips();
+</script>
+</body>
+</html>
